@@ -1,0 +1,26 @@
+{
+  "dependencies": {
+    "@types/react": "^18.2.65",
+    "@types/react-dom": "^18.2.21",
+    "typescript": "^5.4.2"
+  },
+  "name": "city_portal",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "concurrently \"cd ./frontend & npm start\" \"cd ./backend & npm start\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shubnechkin-git/CityPortal.git"
+  },
+  "author": "Shubnechkin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Shubnechkin-git/CityPortal/issues"
+  },
+  "homepage": "https://github.com/Shubnechkin-git/CityPortal#readme",
+  "description": ""
+}
