@@ -1,0 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    min-height: calc(100vh - 160px);
+    margin: 24px 0 24px 0;
+}
+
+.wrapper {
+    background-color: #343A40;
+}

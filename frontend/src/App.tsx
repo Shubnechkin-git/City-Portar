@@ -1,27 +1,30 @@
 import React from "react";
-import logo from "./logo.svg";
-import "./App.css";
+import "./style/App.css";
 
-import Navbar  from "./Components/Navbar";
+import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
+import { Container } from "react-bootstrap";
+import "bootstrap/dist/css/bootstrap.css";
+
+import Navbar from "./Components/App/Navbar";
+import Footer from "./Components/App/Footer";
+import Home from "./Page/Home";
+import Profile from "./Page/Profile";
 
 function App() {
+  document.title = "Городской портал";
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Navbar />
-          Learn React
-        </a>
-      </header>
+    <div className="wrapper">
+      <BrowserRouter>
+        <Navbar />
+        <Container className="content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="*" element={<Navigate to="/" />} />
+          </Routes>
+        </Container>
+        <Footer />
+      </BrowserRouter>
     </div>
   );
 }
