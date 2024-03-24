@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ChangeEventHandler, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 
 interface Props {
@@ -8,6 +8,33 @@ interface Props {
 }
 
 export default function Login(props: Props) {
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+
+  const handleChangeLogin = (e: any) => {
+    let value = e.target.value.slice(0, 20);
+    setLogin(value);
+  };
+
+  const handleChangePassword = (e: any) => {
+    let value = e.target.value.slice(0, 20);
+    setPassword(value);
+  };
+
+  const checkEntered = () => {
+    if (login.length > 0 && password.length > 0) {
+      setMessage("");
+      props.fetchLogin();
+    } else if (login.length == 0) {
+      setMessage("Необходимо ввести логин!");
+    } else if (password.length == 0) {
+      setMessage("Необходимо ввести пароль!");
+    } else {
+      setMessage("Необходимо заполнить все поля!");
+    }
+  };
+
   return (
     <Modal
       show={props.show}
@@ -22,21 +49,26 @@ export default function Login(props: Props) {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Label className="">Логин</Form.Label>
-            <Form.Control type="text" placeholder="Введите логин" />
-            <Form.Label className="mt-3">Пароль</Form.Label>
+            <Form.Label className="">Логин {login.length}</Form.Label>
+            <Form.Control
+              type="text"
+              onChange={handleChangeLogin}
+              placeholder="Введите логин"
+              value={login}
+            />
+            <Form.Label className="mt-3">Пароль {password.length}</Form.Label>
             <Form.Control
               type="password"
               className="mb-3"
               placeholder="Введите пароль"
+              onChange={handleChangePassword}
+              value={password}
             />
-            <Form.Text className="text-danger">
-              Необходимо заполнить все поля!
-            </Form.Text>
+            <Form.Text className="text-danger">{message}</Form.Text>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="light" className="w-100" onClick={props.fetchLogin}>
+          <Button variant="light" className="w-100" onClick={checkEntered}>
             Войти
           </Button>
         </Modal.Footer>

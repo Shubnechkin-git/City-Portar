@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./style/App.css";
 
 import { Routes, Route, BrowserRouter, Navigate } from "react-router-dom";
@@ -9,6 +9,8 @@ import Navbar from "./Components/App/Navbar";
 import Footer from "./Components/App/Footer";
 import Home from "./Page/Home";
 import Profile from "./Page/Profile";
+
+import axios from "axios";
 
 function App() {
   document.title = "Городской портал";
