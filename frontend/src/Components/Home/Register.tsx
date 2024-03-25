@@ -26,17 +26,17 @@ export default function Register(props: Props) {
   };
 
   const handleChangeFio = (e: any) => {
-    let value = e.target.value.slice(0, 20);
+    let value = e.target.value.slice(0, 50);
     setFIO(value);
   };
 
   const handleChangeEmail = (e: any) => {
-    let value = e.target.value.slice(0, 20);
+    let value = e.target.value.slice(0, 50);
     setEmail(value);
   };
 
   const handleChangePassword = (e: any) => {
-    let value = e.target.value.slice(0, 20);
+    let value = e.target.value.slice(0, 50);
     setPassword(value);
   };
 
@@ -72,12 +72,18 @@ export default function Register(props: Props) {
       axios
         .post("/register/create_user", userData)
         .then((res) => {
-          console.log(res);
+          if (res.data.status === true) {
+            props.fetchLogin();
+            console.log(res);
+            setMessage("");
+          } else {
+            console.log(res);
+            setMessage(res.data.message);
+          }
         })
         .catch((err) => {
           console.error(err);
         });
-      props.fetchLogin();
     } else if (fio.length == 0) {
       setMessage("Необходимо ввести ФИО!");
     } else if (login.length == 0) {

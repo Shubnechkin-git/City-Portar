@@ -3,7 +3,7 @@ import { userData } from 'src/interface/userData';
 
 @Controller('login')
 export class LoginController {
-  @Post('login')
+  @Post()
   async login(
     @Body() userData: userData,
   ): Promise<{ status: boolean; message: string }> {

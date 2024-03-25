@@ -7,11 +7,23 @@ export class RegisterController {
   constructor(private readonly databaseService: DatabaseService) {}
 
   @Post('create_user')
-  async register(
-    @Body() userData: userData,
-  ): Promise<{ status: boolean; message: string }> {
-    const result = await this.databaseService.create_user(userData);
-    return { status: true, message: result };
-    return { status: false, message: 'Пользователь не авторизован' };
+  async register(@Body() userData: userData): Promise<any> {
+    const result = await this.databaseService
+      .create_user(userData)
+      .then((result) => {
+        console.log(result);
+        if (result > 0) return { status: false, message: 'Уже существует!' };
+        else
+          return {
+            status: true,
+            data: result,
+            message: 'Пользователь добавлен!',
+          };
+      })
+      .catch((error) => {
+        return { status: false, data: error, message: error.message };
+      });
+    console.log(result);
+    return result;
   }
 }

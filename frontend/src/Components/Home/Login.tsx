@@ -1,5 +1,6 @@
 import React, { ChangeEventHandler, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
+import axios from "axios";
 
 interface Props {
   show: any;
@@ -18,13 +19,14 @@ export default function Login(props: Props) {
   };
 
   const handleChangePassword = (e: any) => {
-    let value = e.target.value.slice(0, 20);
+    let value = e.target.value.slice(0, 50);
     setPassword(value);
   };
 
   const checkEntered = () => {
     if (login.length > 0 && password.length > 0) {
       setMessage("");
+      axios.post("login");
       props.fetchLogin();
     } else if (login.length == 0) {
       setMessage("Необходимо ввести логин!");
