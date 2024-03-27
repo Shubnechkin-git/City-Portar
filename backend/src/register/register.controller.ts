@@ -10,20 +10,21 @@ export class RegisterController {
   async register(@Body() userData: userData): Promise<any> {
     const result = await this.databaseService
       .create_user(userData)
-      .then((result) => {
+      .then(async (result) => {
         console.log(result);
         if (result > 0) return { status: false, message: 'Уже существует!' };
-        else
+        else {
           return {
             status: true,
-            data: result,
+            data: { token: result },
             message: 'Пользователь добавлен!',
           };
+        }
       })
       .catch((error) => {
         return { status: false, data: error, message: error.message };
       });
-    console.log(result);
+    console.log('new:', result);
     return result;
   }
 }

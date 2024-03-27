@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 import Login from "../Home/Login";
@@ -7,10 +7,18 @@ import Navbare from "react-bootstrap/Navbar";
 import { Nav, Container } from "react-bootstrap";
 import Register from "../Home/Register";
 
-export default function Navbar() {
+export default function Navbar(props: any) {
   const [isLogin, setIsLogin] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showRegister, setShowRegister] = useState(false);
+
+  useEffect(() => {
+    if (props.userIsLogged) {
+      setIsLogin(true);
+    } else if (!props.userIsLogged) {
+      setIsLogin(false);
+    }
+  }, [props.userIsLogged]);
 
   const fetchLogin = () => {
     handleClose();
@@ -23,6 +31,8 @@ export default function Navbar() {
     setShowLogin(false);
     setShowRegister(false);
   };
+
+  props.getToken();
 
   return (
     <div>
@@ -47,7 +57,7 @@ export default function Navbar() {
                   <Nav.Link onClick={handleShowLogin}>Авторизация</Nav.Link>
                 </>
               ) : (
-                <Link className="nav-link" to="/profile" onClick={fetchLogin}>
+                <Link className="nav-link" to="/profile">
                   Личный кабинет
                 </Link>
               )}
@@ -57,11 +67,13 @@ export default function Navbar() {
       </Navbare>
       <Login
         show={showLogin}
+        getToken={props.getToken}
         fetchLogin={fetchLogin}
         handleClose={handleClose}
       />
       <Register
         show={showRegister}
+        getToken={props.getToken}
         fetchLogin={fetchLogin}
         handleClose={handleClose}
       />

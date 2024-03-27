@@ -6,12 +6,18 @@ interface Props {
   show: any;
   handleClose: any;
   fetchLogin: any;
+  getToken: any;
 }
 
 export default function Login(props: Props) {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+
+  const userData = {
+    login: login,
+    password: password,
+  };
 
   const handleChangeLogin = (e: any) => {
     let value = e.target.value.slice(0, 20);
@@ -26,8 +32,24 @@ export default function Login(props: Props) {
   const checkEntered = () => {
     if (login.length > 0 && password.length > 0) {
       setMessage("");
-      axios.post("login");
-      props.fetchLogin();
+      axios
+        .post("login", userData)
+        .then((response) => {
+          if (response.data.status == true) {
+            console.log(response.data.data.token);
+            localStorage.setItem("token", response.data.data.token);
+            setMessage("");
+            props.getToken();
+            props.fetchLogin();
+          } else {
+            console.log(response);
+            setMessage(response.data.message);
+          }
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+      // props.fetchLogin();
     } else if (login.length == 0) {
       setMessage("Необходимо ввести логин!");
     } else if (password.length == 0) {
@@ -41,8 +63,9 @@ export default function Login(props: Props) {
     <Modal
       show={props.show}
       onHide={props.handleClose}
-      animation={false}
+      animation={true}
       aria-labelledby="contained-modal-title-vcenter"
+      data-toggle="modal"
       centered
     >
       <div className="reg__form bg-dark text-white">
@@ -51,14 +74,14 @@ export default function Login(props: Props) {
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Label className="">Логин {login.length}</Form.Label>
+            <Form.Label className="">Логин</Form.Label>
             <Form.Control
               type="text"
               onChange={handleChangeLogin}
               placeholder="Введите логин"
               value={login}
             />
-            <Form.Label className="mt-3">Пароль {password.length}</Form.Label>
+            <Form.Label className="mt-3">Пароль</Form.Label>
             <Form.Control
               type="password"
               className="mb-3"

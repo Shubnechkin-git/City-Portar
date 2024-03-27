@@ -1,0 +1,29 @@
+.user__container {
+    background-color: #495057;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    padding: 20px;
+    height: 100%;
+}
+
+.container__info {
+    border-radius: 10px;
+    background-color: #6C757D;
+    padding: 12px;
+}
+
+.info__inner {
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #ADB5BD;
+}
+
+.container__change__password {
+    border-radius: 10px;
+    background-color: #6C757D;
+    padding: 10px;
+    margin-top: 20px;
+}

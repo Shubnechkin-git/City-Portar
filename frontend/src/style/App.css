@@ -11,3 +11,8 @@
 .wrapper {
     background-color: #343A40;
 }
+
+.loading {
+    background-color: #343A40;
+    /* height: 100vh; */
+}

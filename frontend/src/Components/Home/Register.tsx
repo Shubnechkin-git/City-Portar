@@ -7,6 +7,7 @@ interface Props {
   show: any;
   handleClose: any;
   fetchLogin: any;
+  getToken: any;
 }
 
 const LoginStyle = styled.div``;
@@ -75,6 +76,8 @@ export default function Register(props: Props) {
           if (res.data.status === true) {
             props.fetchLogin();
             console.log(res);
+            localStorage.setItem("token", res.data.data.token);
+            props.getToken();
             setMessage("");
           } else {
             console.log(res);

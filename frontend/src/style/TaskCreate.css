@@ -1,0 +1,20 @@
+.form__container {
+    background-color: #495057;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    padding: 20px;
+    height: 100%;
+}
+
+.form div {
+    background-color: #6C757D;
+    border-radius: 10px;
+    padding: 12px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
