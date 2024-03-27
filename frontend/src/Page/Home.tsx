@@ -5,6 +5,7 @@ import Resolved from "../Components/Home/Resolved";
 interface props {
   //   id: number;
   getToken: any;
+  userIsLogged: any;
 }
 
 export default function Home(props: props) {
@@ -12,7 +13,7 @@ export default function Home(props: props) {
   props.getToken();
   return (
     <div className="text-white">
-      <Counter count={4} />
+      <Counter userIsLogged={props.userIsLogged} count={4} />
       <Resolved />
     </div>
   );

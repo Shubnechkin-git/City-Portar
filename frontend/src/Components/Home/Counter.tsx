@@ -1,7 +1,8 @@
 import React from "react";
 import { Button } from "react-bootstrap";
 import styled from "styled-components";
-
+import Profile from "../../Page/Profile";
+import Login from "./Login";
 const CounterStyle = styled.div`
   .counter__line {
     margin-top: 24px;
@@ -13,6 +14,7 @@ const CounterStyle = styled.div`
 
 interface Props {
   count: number;
+  userIsLogged: boolean;
 }
 
 export default function Counter(props: Props) {
@@ -21,7 +23,9 @@ export default function Counter(props: Props) {
       <div className="counter">
         <div className="d-flex justify-content-between">
           <h1 className="">Количество решенных задач: {props.count}</h1>
-          <Button className="btn-light btn">Создать заявку</Button>
+          {/* <Button className="btn-light btn" onClick={handleCreate}>
+            Создать заявку
+          </Button> */}
         </div>
         <div className="counter__line"></div>
       </div>

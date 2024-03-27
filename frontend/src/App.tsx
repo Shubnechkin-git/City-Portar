@@ -88,7 +88,10 @@ function App() {
         <br /> */}
         <Container className="content">
           <Routes>
-            <Route path="/" element={<Home getToken={getToken} />} />
+            <Route
+              path="/"
+              element={<Home userIsLogged={userIsLogged} getToken={getToken} />}
+            />
             {!loading && userIsLogged && (
               <>
                 <Route
